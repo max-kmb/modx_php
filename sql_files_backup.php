@@ -11,7 +11,12 @@ echo("Backup $filename is ready");
 
 /* files backup */
 $file = "full_". date("Y-m-d") . ".tar.gz";
+/* unlim file`s size for upload from hosting*/
 system("tar -czf $file ./");
+/* OR
+if exist limit (f.e. =20 mb) file`s size then doing multifiles archive 
+system('tar czvf - ../ | split --bytes=20MB - ./manager/full_`date +%F`.tar.gz');
+*/
 if (file_exists($file)) {
     header('Content-Description: File Transfer');
     header('Content-Type: application/octet-stream');
